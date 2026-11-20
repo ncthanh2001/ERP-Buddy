@@ -12,7 +12,7 @@ from typing import Any
 from urllib.parse import quote
 
 import frappe
-from frappe.model import default_fields, no_value_fields
+from frappe.model import default_fields, no_value_fields, table_fields
 
 # DocTypes the assistant never reads, even for an administrator: credentials and its own config.
 READ_BLOCKED_DOCTYPES = {
@@ -121,9 +121,16 @@ def normalize(text: str) -> str:
 	return "".join(c for c in text if unicodedata.category(c) != "Mn")
 
 
-def readable_fieldnames(meta) -> set:
-	"""Fields this user may read on this DocType (respects permlevel)."""
+def readable_fieldnames(meta, include_tables: bool = False) -> set:
+	"""Fields this user may read on this DocType (respects permlevel).
+
+	Frappe's permitted fieldnames leave out child tables; pass include_tables to add the
+	ones at a permlevel the user can read.
+	"""
 	names = set(meta.get_permitted_fieldnames(permission_type="read") or [])
+	if include_tables:
+		levels = set(meta.get_permlevel_access(permission_type="read"))
+		names |= {df.fieldname for df in meta.get_table_fields() if df.permlevel in levels}
 	return names | {"name", "creation", "modified", "owner", "modified_by", "docstatus"}
 
 
@@ -140,7 +147,8 @@ def jsonable(value: Any, max_text: int = 1500) -> Any:
 
 
 def value_fields(meta) -> list:
-	return [df for df in meta.fields if df.fieldtype not in no_value_fields]
+	"""Fields that hold data, child tables included (Frappe's no_value_fields lists them too)."""
+	return [df for df in meta.fields if df.fieldtype in table_fields or df.fieldtype not in no_value_fields]
 
 
 def is_safe_identifier(value: str) -> bool:

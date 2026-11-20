@@ -4,7 +4,14 @@ import frappe
 from frappe import _
 from frappe.model import table_fields
 
-from erp_buddy.ai.tools.base import BaseTool, ToolContext, doc_url, require_doctype, value_fields
+from erp_buddy.ai.tools.base import (
+	BaseTool,
+	ToolContext,
+	doc_url,
+	readable_fieldnames,
+	require_doctype,
+	value_fields,
+)
 
 
 def _describe_fields(meta, readable: set | None, limit: int = 80) -> list[dict]:
@@ -53,7 +60,7 @@ class GetDocTypeInfo(BaseTool):
 	def run(self, args, ctx: ToolContext):
 		doctype = require_doctype(args.get("doctype"), "read")
 		meta = frappe.get_meta(doctype)
-		readable = set(meta.get_permitted_fieldnames(permission_type="read") or [])
+		readable = readable_fieldnames(meta, include_tables=True)
 
 		child_tables = {}
 		for df in meta.get_table_fields():

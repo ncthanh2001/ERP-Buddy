@@ -277,6 +277,24 @@ def _preview(meta, values: dict) -> list[dict]:
 	return items
 
 
+def _missing_user_fields(doc, meta) -> list[str]:
+	"""Mandatory fields still empty that the user is expected to fill in.
+
+	ERPNext controllers fill many mandatory fields themselves on save (exchange rates,
+	price list currency, totals). Let them run first, then only report fields the user
+	can actually enter, so the model does not ask for values the system will set.
+	"""
+	if hasattr(doc, "set_missing_values"):
+		try:
+			doc.set_missing_values()
+		except Exception:
+			pass  # a real problem surfaces again, with its message, when the user confirms
+		finally:
+			frappe.local.message_log = []
+	user_fields = _writable_fields(meta)
+	return [fieldname for fieldname, _msg in doc._get_missing_mandatory_fields() if fieldname in user_fields]
+
+
 class CreateDocument(BaseTool):
 	name = "create_document"
 	label = "Preparing a new document"
@@ -311,7 +329,7 @@ class CreateDocument(BaseTool):
 		doc = frappe.new_doc(doctype)
 		doc.update(values)
 
-		missing = [fieldname for fieldname, _msg in doc._get_missing_mandatory_fields()]
+		missing = _missing_user_fields(doc, meta)
 		bad_links = _invalid_links(meta, values)
 		if missing or bad_links:
 			return {
