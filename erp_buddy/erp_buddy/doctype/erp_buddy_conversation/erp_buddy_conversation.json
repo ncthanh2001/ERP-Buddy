@@ -1,0 +1,66 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2026-11-19 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "user",
+  "messages",
+  "pending_actions"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "User",
+   "options": "User",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "description": "Conversation history (JSON, provider-neutral format)",
+   "fieldname": "messages",
+   "fieldtype": "Code",
+   "label": "Messages",
+   "options": "JSON",
+   "read_only": 1
+  },
+  {
+   "description": "Data writes waiting for the user's confirmation",
+   "fieldname": "pending_actions",
+   "fieldtype": "Code",
+   "label": "Pending Actions",
+   "options": "JSON",
+   "read_only": 1
+  }
+ ],
+ "in_create": 1,
+ "links": [],
+ "modified": "2026-11-19 18:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "ERP Buddy",
+ "name": "ERP Buddy Conversation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "delete": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title"
+}

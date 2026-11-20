@@ -1,0 +1,90 @@
+[
+ {
+  "question": "Làm sao để tạo đơn bán hàng?",
+  "expected_guide": "Selling process: from customer to invoice"
+ },
+ {
+  "question": "tao don ban hang",
+  "expected_guide": "Selling process: from customer to invoice"
+ },
+ {
+  "question": "Tôi muốn lên đơn cho khách",
+  "expected_guide": "Selling process: from customer to invoice"
+ },
+ {
+  "question": "chốt đơn cho khách hàng thế nào",
+  "expected_guide": "Selling process: from customer to invoice"
+ },
+ {
+  "question": "Khách đặt hàng thì nhập vào đâu?",
+  "expected_guide": "Selling process: from customer to invoice"
+ },
+ {
+  "question": "cách làm sales order",
+  "expected_guide": "Selling process: from customer to invoice"
+ },
+ {
+  "question": "tạo SO mới",
+  "expected_guide": "Selling process: from customer to invoice"
+ },
+ {
+  "question": "mình cần ghi nhận một đơn đặt hàng của khách",
+  "expected_guide": "Selling process: from customer to invoice"
+ },
+ {
+  "question": "bán hàng cho khách thì làm gì trên hệ thống",
+  "expected_guide": "Selling process: from customer to invoice"
+ },
+ {
+  "question": "xuất bill cho khách sao vậy",
+  "expected_guide": "Selling process: from customer to invoice"
+ },
+ {
+  "question": "quy trình mua hàng",
+  "expected_guide": "Buying process"
+ },
+ {
+  "question": "đặt hàng với nhà cung cấp như nào",
+  "expected_guide": "Buying process"
+ },
+ {
+  "question": "tạo PO",
+  "expected_guide": "Buying process"
+ },
+ {
+  "question": "hướng dẫn nhập kho",
+  "expected_guide": "Items and stock management"
+ },
+ {
+  "question": "làm phiếu xuất kho",
+  "expected_guide": "Items and stock management"
+ },
+ {
+  "question": "chuyển hàng sang kho khác",
+  "expected_guide": "Items and stock management"
+ },
+ {
+  "question": "khách hàng tiềm năng",
+  "expected_guide": "CRM: leads and opportunities"
+ },
+ {
+  "question": "thêm lead",
+  "expected_guide": "CRM: leads and opportunities"
+ },
+ {
+  "question": "tạo bút toán",
+  "expected_guide": "Accounting basics"
+ },
+ {
+  "question": "xem báo cáo lãi lỗ",
+  "expected_guide": "Accounting basics"
+ },
+ {
+  "question": "phần mềm có những chức năng gì",
+  "expected_guide": "ERP system overview and main modules"
+ },
+ {
+  "question": "submit là gì",
+  "expected_guide": "ERP system overview and main modules"
+ }
+]

@@ -1,3 +1,5 @@
+from erp_buddy import __version__
+
 app_name = "erp_buddy"
 app_title = "ERP Buddy"
 app_publisher = "thanhnc"
@@ -38,8 +40,28 @@ use_json_request_body = True
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/erp_buddy/css/erp_buddy.css"
-# app_include_js = "/assets/erp_buddy/js/erp_buddy.js"
+def _asset_version(*relpaths: str) -> str:
+	"""Short digest of the widget files, so ?v= changes whenever they change.
+
+	These plain files are not hashed by the bundler. A failure falls back to the app
+	version: a stale cache is a nuisance, an exception in hooks.py is an outage.
+	"""
+	import hashlib
+	import os
+
+	try:
+		digest = hashlib.sha1()
+		for rel in relpaths:
+			with open(os.path.join(os.path.dirname(__file__), "public", rel), "rb") as f:
+				digest.update(f.read())
+		return f"{__version__}-{digest.hexdigest()[:8]}"
+	except OSError:
+		return __version__
+
+
+_ASSET_V = _asset_version("css/erp_buddy_chat.css", "js/erp_buddy_chat.js")
+app_include_css = f"/assets/erp_buddy/css/erp_buddy_chat.css?v={_ASSET_V}"
+app_include_js = f"/assets/erp_buddy/js/erp_buddy_chat.js?v={_ASSET_V}"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/erp_buddy/css/erp_buddy.css"
@@ -108,7 +130,7 @@ use_json_request_body = True
 # ------------
 
 # before_install = "erp_buddy.install.before_install"
-# after_install = "erp_buddy.install.after_install"
+after_install = "erp_buddy.setup.install.after_install"
 
 # Uninstallation
 # ------------

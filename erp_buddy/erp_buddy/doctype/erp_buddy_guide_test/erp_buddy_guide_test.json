@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2026-11-20 14:00:00.000000",
+ "description": "A question and the guide that should answer it. Run All Tests from the list checks every case with the same matcher the assistant uses.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "question",
+  "expected_guide",
+  "result_section",
+  "status",
+  "actual_guide",
+  "column_break_result",
+  "similarity",
+  "answered_verbatim",
+  "last_run"
+ ],
+ "fields": [
+  {
+   "fieldname": "question",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Question",
+   "length": 255,
+   "reqd": 1
+  },
+  {
+   "fieldname": "expected_guide",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Expected Guide",
+   "options": "ERP Buddy Guide",
+   "reqd": 1
+  },
+  {
+   "fieldname": "result_section",
+   "fieldtype": "Section Break",
+   "label": "Last Result"
+  },
+  {
+   "default": "Not Run",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Not Run\nPassed\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_guide",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Matched Guide",
+   "options": "ERP Buddy Guide",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_result",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Word overlap with the closest sample question (0 to 1)",
+   "fieldname": "similarity",
+   "fieldtype": "Float",
+   "label": "Similarity",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "The user would get the approved answer as-is, without the AI",
+   "fieldname": "answered_verbatim",
+   "fieldtype": "Check",
+   "label": "Answered Verbatim",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_run",
+   "fieldtype": "Datetime",
+   "label": "Last Run",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-11-20 16:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "ERP Buddy",
+ "name": "ERP Buddy Guide Test",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager"
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "ERP Buddy Guide Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "question"
+}

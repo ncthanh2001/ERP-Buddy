@@ -1,0 +1,155 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:title",
+ "creation": "2026-11-20 12:00:00.000000",
+ "description": "User guides that ERP Buddy searches to answer how-to questions",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "enabled",
+  "column_break_main",
+  "module",
+  "roles",
+  "section_break_matching",
+  "keywords",
+  "sample_questions",
+  "section_break_answer",
+  "answer_mode",
+  "column_break_answer",
+  "answer_mode_help",
+  "verbatim_answer",
+  "section_break_content",
+  "content"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "column_break_main",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "module",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Module",
+   "options": "Module Def"
+  },
+  {
+   "description": "Only users with one of these roles get this guide. Leave empty for everyone.",
+   "fieldname": "roles",
+   "fieldtype": "Table MultiSelect",
+   "label": "Visible to Roles",
+   "options": "ERP Buddy Guide Role"
+  },
+  {
+   "fieldname": "section_break_matching",
+   "fieldtype": "Section Break",
+   "label": "Matching"
+  },
+  {
+   "description": "Comma-separated search terms in every language users ask in, e.g. sales order, đơn bán hàng, bán hàng",
+   "fieldname": "keywords",
+   "fieldtype": "Small Text",
+   "label": "Keywords"
+  },
+  {
+   "description": "Different ways users ask about this topic, including abbreviations and slang (e.g. tạo SO mới, xuất bill cho khách). The closer a question is to one of these, the more surely this guide is picked.",
+   "fieldname": "sample_questions",
+   "fieldtype": "Table",
+   "label": "Sample Questions",
+   "options": "ERP Buddy Guide Question"
+  },
+  {
+   "fieldname": "section_break_answer",
+   "fieldtype": "Section Break",
+   "label": "Answer"
+  },
+  {
+   "default": "Reference",
+   "fieldname": "answer_mode",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Answer Mode",
+   "options": "Reference\nVerbatim"
+  },
+  {
+   "fieldname": "column_break_answer",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "answer_mode_help",
+   "fieldtype": "HTML",
+   "label": "Answer Mode Help",
+   "options": "<p class=\"text-muted small\"><b>Reference</b>: the assistant reads the content and answers in its own words.<br><b>Verbatim</b>: when a question closely matches a sample question, the user gets exactly the approved answer below, every time, without the AI rewording it.</p>"
+  },
+  {
+   "depends_on": "eval:doc.answer_mode=='Verbatim'",
+   "fieldname": "verbatim_answer",
+   "fieldtype": "Markdown Editor",
+   "label": "Approved Answer",
+   "mandatory_depends_on": "eval:doc.answer_mode=='Verbatim'"
+  },
+  {
+   "fieldname": "section_break_content",
+   "fieldtype": "Section Break",
+   "label": "Content"
+  },
+  {
+   "fieldname": "content",
+   "fieldtype": "Markdown Editor",
+   "label": "Content",
+   "reqd": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-11-20 16:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "ERP Buddy",
+ "name": "ERP Buddy Guide",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager"
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "ERP Buddy Guide Manager",
+   "write": 1
+  }
+ ],
+ "search_fields": "module,keywords",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}
