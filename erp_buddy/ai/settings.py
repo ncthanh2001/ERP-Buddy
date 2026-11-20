@@ -7,6 +7,10 @@ already exists keeps whatever it had), so every value falls back here.
 import frappe
 
 DEFAULT_SYSTEM_NAME = "the current ERP system"
+DEFAULT_RESTRICTED_REPLY = (
+	"Sorry, I can't share how I am built or how I work. I can help you with how to do a task, "
+	"finding data, or creating records in the ERP system."
+)
 
 DEFAULT_BASE_URLS = {
 	"Anthropic": "https://api.anthropic.com",
@@ -34,6 +38,7 @@ def get_settings() -> frappe._dict:
 		request_timeout=doc.request_timeout or 90,
 		extra_instructions=doc.extra_instructions or "",
 		system_name=(doc.get("system_name") or "").strip() or DEFAULT_SYSTEM_NAME,
+		restricted_reply=(doc.get("restricted_reply") or "").strip() or DEFAULT_RESTRICTED_REPLY,
 	)
 
 

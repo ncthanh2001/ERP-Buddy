@@ -18,6 +18,7 @@
   "temperature",
   "behaviour_section",
   "system_name",
+  "restricted_reply",
   "extra_instructions"
  ],
  "fields": [
@@ -113,6 +114,13 @@
    "label": "System Name"
   },
   {
+   "default": "Sorry, I can't share how I am built or how I work. I can help you with how to do a task, finding data, or creating records in the ERP system.",
+   "description": "Fixed reply when someone asks how the assistant itself works (architecture, AI model, prompts, tools). Sent without calling the AI.",
+   "fieldname": "restricted_reply",
+   "fieldtype": "Small Text",
+   "label": "Reply to Questions About the Assistant"
+  },
+  {
    "description": "Additional instructions for the assistant (e.g. internal company rules)",
    "fieldname": "extra_instructions",
    "fieldtype": "Long Text",
@@ -121,7 +129,7 @@
  ],
  "issingle": 1,
  "links": [],
- "modified": "2026-11-20 16:00:00.000000",
+ "modified": "2026-11-20 18:00:00.000000",
  "modified_by": "Administrator",
  "module": "ERP Buddy",
  "name": "ERP Buddy Settings",
