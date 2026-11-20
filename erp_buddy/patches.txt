@@ -7,6 +7,7 @@
 erp_buddy.patches.seed_default_guides
 erp_buddy.patches.add_guide_samples_and_tests
 erp_buddy.patches.rebrand_overview_guide
+erp_buddy.patches.add_training_template_guide
 
 [post_fixture_sync]
 # Patches added in this section will be executed after fixtures and customizations

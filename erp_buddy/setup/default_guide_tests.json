@@ -86,5 +86,9 @@
  {
   "question": "submit là gì",
   "expected_guide": "ERP system overview and main modules"
+ },
+ {
+  "question": "tôi muốn dạy thêm cho chatbox",
+  "expected_guide": "How to teach ERP Buddy (training template)"
  }
 ]

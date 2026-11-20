@@ -31,6 +31,7 @@ def default_guides() -> list[dict]:
 				"module": meta.get("module"),
 				"keywords": meta.get("keywords", ""),
 				"questions": [q.strip() for q in meta.get("questions", "").split("|") if q.strip()],
+				"roles": [r.strip() for r in meta.get("roles", "").split(",") if r.strip()],
 				"content": content,
 			}
 		)
@@ -56,6 +57,7 @@ def seed_default_guides():
 				"keywords": g["keywords"],
 				"answer_mode": "Reference",
 				"sample_questions": [{"question": q} for q in g["questions"]],
+				"roles": [{"role": r} for r in g["roles"] if frappe.db.exists("Role", r)],
 				"content": g["content"],
 			}
 		).insert(ignore_permissions=True)

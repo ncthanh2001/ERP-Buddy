@@ -82,3 +82,30 @@ def is_about_the_assistant(text: str) -> bool:
 	"""True when the question asks how the assistant itself is built or works."""
 	marked = _mark_self(text or "")
 	return any(p.search(marked) for p in _PATTERNS)
+
+
+# "dạy" (teach) unaccented is "day", which is also "đây" (here); recognise it with accents.
+_TEACH_ACCENTED = re.compile(r"\bdạy\b", re.IGNORECASE)
+TEACH = "zzteach"
+_TEACH_VERB = (
+	rf"(?:train|training|huan luyen|dao tao|{TEACH}|teach|cho hoc|hoc them|nap them|"
+	r"bo sung kien thuc|them kien thuc|cap nhat kien thuc|nap kien thuc|add knowledge|update knowledge)"
+)
+_TEACH_TARGET = rf"(?:{SELF}|kien thuc|knowledge|thong tin moi|tai lieu moi)"
+# Passive or "with what" phrasing asks how the assistant was built, not how to teach it.
+_TEACH_PASSIVE = rf"\b(?:duoc|was|were|is|are|been) {_TEACH_VERB}\b"
+
+
+def is_training_request(text: str) -> bool:
+	"""True when someone wants to teach the assistant something new ("muốn dạy thêm cho chatbox").
+
+	These are answered with how to add knowledge (ERP Buddy Guides), so they must get past
+	the architecture block even though they mention training.
+	"""
+	marked = _mark_self(_TEACH_ACCENTED.sub(f" {TEACH} ", text or ""))
+	if re.search(_TEACH_PASSIVE, marked):
+		return False
+	return bool(
+		re.search(rf"\b{_TEACH_VERB}\b.{{0,40}}\b{_TEACH_TARGET}\b", marked)
+		or re.search(rf"\b{_TEACH_TARGET}\b.{{0,30}}\b(?:hoc|hoc them|biet them|learn|learn more)\b", marked)
+	)
